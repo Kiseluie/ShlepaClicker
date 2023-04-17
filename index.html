@@ -1,23 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
+
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shlepa Clicker</title>
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./css/style.css">
 </head>
+
 <body>
     <h1>Shlepa Clicker</h1>
     <p id="instructions">Пельмени! Дай Шлепе как можно больше пельмений!</p>
-    <img id="Shlepa" src="./img/шлёпа-PhotoRoom.png-PhotoRoom.png" alt="shlepa" onclick="addPelmen()">
-   <div class="statistics">
-        <p id="WholeCounter"><img src="./img/image-removebg-preview.png" alt="pelmen"> Скушал: <span id="count">0</span></p>
-        <button id="Shop" onclick="gotoShop()">Магазин</button>
+    <img id="Shlepa" src="./assets/images/shlepa.png" alt="error load image">
+    <div class="statistics">
+        <p id="WholeCounter">Скушал: <span id="count">0</span>
+            <img src="./assets/images/dumpling.png" alt="error load image">
+        </p>
+        <button id="Shop">Магазин</button>
         <p id="WholeMoney">Благословений: <span id="money">0</span></p>
-        
-   </div>
+    </div>
 
-   <script src="./script.js"></script>
+    <!-- Для модальных окон -->
+    <div class="modals">
+        <div class="modal shop none">
+            
+        </div>
+    </div>
+
+    <script src="./js/script.js"></script>
 </body>
+
 </html>

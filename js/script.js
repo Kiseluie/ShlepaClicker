@@ -24,7 +24,9 @@
 //     }
 // }
 
-class Booster {
+
+
+class Game {
     constructor() {
         this.a = 0;
         this.b = 0;
@@ -34,7 +36,7 @@ class Booster {
         this.money = 0;
     }
 
-    click() {
+    click(booster) {
         this.addPelmen();
         this.addMoney();
 
@@ -47,10 +49,12 @@ class Booster {
     }
 
     addMoney() {
-        this.money += 1 + 2 * this.b + 4 * this.c;
-        console.log(this.money);
+        this.money +=
+            1 +
+            this.a * 1 +
+            this.b * 2 +
+            this.c * 4;
     }
-
 
     render() {
         document.getElementById('count').innerHTML = this.pelmen;
@@ -59,8 +63,52 @@ class Booster {
 
 }
 
+class Booster {
+    constructor() {
+        this.booster = {
+            'a': {
+                cost: 10,
+                value: 0
+            },
+            'b': {
+                cost: 25,
+                value: 0
+            },
+            'c': {
+                cost: 100,
+                value: 0
+            },
+        };
+    }
+
+    getBuster() {
+        return this.booster;
+    }
+
+    buy(boost) {
+        if ( this.booster.hasOwnProperty(bust) ) {
+            this.booster[bust].value += 1;
+            this.booster[bust].cost *= 2;
+        } else {
+            console.log('Error. Unknown bust: ' + boost);
+        }
+    }
+}
+
+class Shop {
+    constructor(booster) {
+        
+    }
+
+    
+
+}
+
+let shop = new Shop();
 let booster = new Booster();
+let game = new Game();
+
 
 document.querySelector("#Shlepa").onclick = () => {
-    booster.click();
+    game.click(booster);
 }
