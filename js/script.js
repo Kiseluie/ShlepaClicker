@@ -45,11 +45,10 @@ class Booster {
 
         this.pelmen = 0;
         this.money = 0;
-
     }
 
     buy(boost) {
-        if ( this.boosters.hasOwnProperty(bust) ) {
+        if ( this.boosters.hasOwnProperty(boost) ) {
             this.boosters[bust].value += 1;
             this.boosters[bust].cost *= 2;
         } else {
@@ -65,17 +64,21 @@ class Booster {
             this.boosters.a.value * 1 +
             this.boosters.b.value * 2 +
             this.boosters.c.value * 4;
+    }
 
+    getBoost(boost) {
+        if ( this.boosters.hasOwnProperty(boost) ) {
+
+        } else {
+            console.log('Error. Unknown bust: ' + boost);
+        }
     }
 }
 
 class Shop {
-
     constructor() {
 
     }
-
-
 }
 
 class Game {
@@ -96,22 +99,21 @@ class Game {
 
 
     render() {
-        this.buttons.count.innerHTML = this.pelmen;
-        this.buttons.money.innerHTML = this.money;
+        this.buttons.count.innerHTML = this.booster.pelmen;
+        this.buttons.money.innerHTML = this.booster.money;
         
-        this.buttons.a.innerHTML = this.booster.boosters.a;
-        this.buttons.b.innerHTML = this.booster.boosters.b;
-        this.buttons.c.innerHTML = this.booster.boosters.c;
+        this.buttons.a.innerHTML = this.booster.boosters.a.value;
+        this.buttons.b.innerHTML = this.booster.boosters.b.value;
+        this.buttons.c.innerHTML = this.booster.boosters.c.value;
+
     }
 }
 
 let game = new Game(); 
 
-let booster = new Booster();
-let shop = new Shop();
 
 document.querySelector("#Shlepa").onclick = () => {
-    booster.click();
+    game.booster.click();
 }
 
 document.querySelector("#Shop").onclick = () => {
@@ -119,3 +121,8 @@ document.querySelector("#Shop").onclick = () => {
     shop.classList.remove('none');
 }
 
+
+// Отображение счёта независимо от основной игры
+setInterval(() => {
+    game.render();
+}, 100);
