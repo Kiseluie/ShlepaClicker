@@ -1,175 +1,110 @@
-// var pelmen = 0;
-// var money = 0;
-// var coef = 1; 
-/* При покупке улучшений коэффицент повысится */
+"use strict";
 
-/*Подсчёт */
-// function addPelmen(){
-//     pelmen += 1;
-//     document.getElementById('count').innerHTML = pelmen;
-//     addMoney();
-// }
-
-// function addMoney(){
-//     money += 1 * coef;
-//     document.getElementById('money').innerHTML = money;
-// }
-
-/*Магазин */
-// function gotoShop(){
-//     document.getElementById('shop').onclick = function(){
-//        var el = document.getElementsByTagName('body');
-//        el.style.opacity = 0;
-//        el.style.transition = 20;
-//     }
-// }
-
-
-class Booster {
-
+class Game {
     constructor() {
-        this.boosters = {
-            a: {
-                cost: 100,
-                value: 2
-            },
-            b: {
-                cost: 1000,
-                value: 5
-            },
-            c: {
-                cost: 10000,
-                value: 10
-            },
-        };
-
         this.pelmen = 0;
         this.money = 0;
-        this.multiplyer = 1;
+
+        this.boost_cost = {
+            first: 100,
+            second: 1000,
+            third: 10000,
+        };
+
+        this.boost_count = {
+            first: 0,
+            second: 0,
+            third: 0,
+        };
     }
 
-    // buy(boost) {
-    //     if ( this.boosters.hasOwnProperty(boost) ) {
-    //         this.boosters[bust].value += 1;
-    //         this.boosters[bust].cost *= 2;
-    //     } else {
-    //         console.log('Error. Unknown bust: ' + boost);
-    //     }
-    // }
-    
     click() {
         this.pelmen += 1;
 
         this.money +=
-            1 * this.multiplyer;
-            // this.boosters.a.value * 1 +
-            // this.boosters.b.value * 2 +
-            // this.boosters.c.value * 4;
+            1 *
+            (5 ** this.boost_count.first) *
+            (10 ** this.boost_count.second) +
+            (100 * this.boost_count.third);
     }
 
-    selectBoost(){
-        document.querySelector("#first-boost").onclick = () => {
-            if (this.money >= 100){
-                this.money -= 100;
-            
-                this.multiplyer = 5;
-                const add_btn = document.querySelector('#first-boost');
-                add_btn.classList.add('none');
-            }
-            else{
-                alert('Недостаточно благословений!');
-            }
+    buyBoost(boost_name) {
+        let isBuy = false;
+        if (this.money >= this.boost_cost[boost_name]) {
+            this.money -= this.boost_cost[boost_name];
+
+            this.boost_count[boost_name] += 1;
+            isBuy = true;
         }
-
-        document.querySelector("#second-boost").onclick = () => {
-            if (this.money >= 1000){
-                this.money -= 1000;
-           
-                this.multiplyer = 10;
-                const add_btn = document.querySelector('#second-boost');
-                add_btn.classList.add('none');   
-            }
-            else{
-                alert('Недостаточно благословений!');
-            }
-        }
-
-        document.querySelector("#third-boost").onclick = () => {
-            if (this.money >= 10000){
-                this.money -= 10000;
-            
-                this.multiplyer += 100;
-            }
-            else{
-                alert('Недостаточно благословений!');
-            }
-        }
-    }
-    // getBoost(boost) {
-    //     if ( this.boosters.hasOwnProperty(boost) ) {
-
-    //     } else {
-    //         console.log('Error. Unknown bust: ' + boost);
-    //     }
-    // }
-}
-
-class Shop {
-    constructor() {
-        
+        return isBuy;
     }
 }
 
-class Game {
-    constructor() {
-        this.booster = new Booster();
-        this.shop = new Shop();
+// Модальные окна
+const shop = document.querySelector('.shop'); // магазин
 
-        this.buttons = {
-            count: document.getElementById('count'),
-            money: document.getElementById('money'),
+// Область клика
+const shlepa = document.querySelector("#shlepa"); // Получение области клика
 
-            a: document.getElementById('a'),
-            b: document.getElementById('b'),
-            c: document.getElementById('c')
-        };
+// Отображаемые значения
+const pelmen = document.getElementById('pelmen'); // Получение места для отображения количества пельменей
+const money = document.getElementById('money'); // Получение места для отображения количества денег
+
+// Кнопки магазина
+const boost_first = document.querySelector("#boost-first");
+const boost_second = document.querySelector("#boost-second");
+const boost_third = document.querySelector("#boost-third");
+
+// Игровая логика
+const game = new Game(); // создание переменной игры
+
+function gRender() {
+    pelmen.innerHTML = game.pelmen;
+    money.innerHTML = game.money;
+}
+
+function gClickShlepa() {
+    game.click();
+    gRender();
+}
+
+function gClickBoostFirst(e) {
+    const isBuy = game.buyBoost('first');
+    if (isBuy) {
+        e.target.classList.toggle('none');
+        gRender();
+    } else {
+        alert('Недостаточно благословений!');
     }
+}
 
-
-
-    render() {
-        this.buttons.count.innerHTML = this.booster.pelmen;
-        this.buttons.money.innerHTML = this.booster.money;
-        
-        this.buttons.a.innerHTML = this.booster.boosters.a.cost;
-        this.buttons.b.innerHTML = this.booster.boosters.b.cost;
-        this.buttons.c.innerHTML = this.booster.boosters.c.cost;
-
+function gClickBoostSecond(e) {
+    const isBuy = game.buyBoost('second');
+    if (isBuy) {
+        e.target.classList.toggle('none');
+        gRender();
+    } else {
+        alert('Недостаточно благословений!');
     }
 }
 
-let game = new Game(); 
-
-
-document.querySelector("#Shlepa").onclick = () => {
-    game.booster.click();
-    game.booster.selectBoost();
+function gClickBoostThird(e) {
+    const isBuy = game.buyBoost('third');
+    if (isBuy) {
+        gRender();
+    } else {
+        alert('Недостаточно благословений!');
+    }
 }
 
-document.querySelector("#Shop").onclick = () => {
-    const shop = document.querySelector('.shop');
-    shop.classList.remove('none');
-}
+// Привяжка слика по шлёпе к событию клика
+shlepa.addEventListener('click', gClickShlepa);
 
-document.querySelector("#close").onclick = () => {
-    const shop = document.querySelector('.shop');
-    shop.classList.add('none');
-}
+// Привязка кнопок для покупки улучшений
+boost_first.onclick = gClickBoostFirst;
+boost_second.onclick = gClickBoostSecond;
+boost_third.onclick = gClickBoostThird;
 
-
-
-
-// Отображение счёта независимо от основной игры
-setInterval(() => {
-    game.render();
-}, 100);
+// Привязка кнопок для открытия и закрытия магазина
+document.querySelector("#shop-open").onclick = () => shop.classList.toggle('none');
+document.querySelector("#shop-close").onclick = () => shop.classList.toggle('none');
