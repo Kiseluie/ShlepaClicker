@@ -80,6 +80,14 @@ button:hover {
   background-color: rgba(0, 0, 0, 0.1);
 }
 
+.modal > p{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+}
+
 .shop {
   margin-top: 200px;
   margin-left: auto;
@@ -99,7 +107,11 @@ button:hover {
   border-radius: 10px;
 }
 
-
+.add-btn{
+  margin-left: 2%;
+  width: 20px;
+  height: 20px;
+}
 
 .none {
   display: none;
