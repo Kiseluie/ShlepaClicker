@@ -70,7 +70,7 @@ class Booster {
     selectBoost(){
         document.querySelector("#first-boost").onclick = () => {
             if (this.money >= 100){
-                this.moeny -= 100;
+                this.money -= 100;
             
                 this.multiplyer = 5;
                 const add_btn = document.querySelector('#first-boost');
@@ -83,7 +83,7 @@ class Booster {
 
         document.querySelector("#second-boost").onclick = () => {
             if (this.money >= 1000){
-                this.moeny -= 1000;
+                this.money -= 1000;
            
                 this.multiplyer = 10;
                 const add_btn = document.querySelector('#second-boost');
@@ -96,9 +96,9 @@ class Booster {
 
         document.querySelector("#third-boost").onclick = () => {
             if (this.money >= 10000){
-                this.moeny -= 10000;
+                this.money -= 10000;
             
-                this.multiplyer += 10;
+                this.multiplyer += 100;
             }
             else{
                 alert('Недостаточно благословений!');
