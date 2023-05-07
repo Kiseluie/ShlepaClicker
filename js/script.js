@@ -98,7 +98,7 @@ function gClickBoostThird(e) {
 }
 
 // Привяжка слика по шлёпе к событию клика
-shlepa.addEventListener('click', gClickShlepa);
+shlepa.onclick = gClickShlepa;
 
 // Привязка кнопок для покупки улучшений
 boost_first.onclick = gClickBoostFirst;
