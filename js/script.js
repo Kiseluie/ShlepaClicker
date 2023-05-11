@@ -9,12 +9,14 @@ class Game {
             first: 100,
             second: 1000,
             third: 10000,
+            fourth: 100000
         };
 
         this.boost_count = {
             first: 0,
             second: 0,
             third: 0,
+            fourth: 0
         };
     }
 
@@ -25,7 +27,8 @@ class Game {
             1 *
             (5 ** this.boost_count.first) *
             (10 ** this.boost_count.second) +
-            (100 * this.boost_count.third);
+            (100 * this.boost_count.third) +
+            (10000 * this.boost_count.fourth);
     }
 
     buyBoost(boost_name) {
@@ -54,9 +57,12 @@ const money = document.getElementById('money'); // Получение места
 const boost_first = document.querySelector("#boost-first");
 const boost_second = document.querySelector("#boost-second");
 const boost_third = document.querySelector("#boost-third");
+const boost_fourth = document.querySelector("#boost-fourth");
 
 // Игровая логика
 const game = new Game(); // создание переменной игры
+
+
 
 function gRender() {
     pelmen.innerHTML = game.pelmen;
@@ -65,6 +71,8 @@ function gRender() {
 
 function gClickShlepa() {
     game.click();
+    WTF();
+
     gRender();
 }
 
@@ -97,6 +105,48 @@ function gClickBoostThird(e) {
     }
 }
 
+function gClickBoostFourth(e) {
+    const isBuy = game.buyBoost('fourth');
+    if (isBuy) {
+        gRender();
+    } else {
+        alert('Недостаточно благословений!');
+    }
+}
+
+function WTF() {
+    let path = '/assets/images/'
+    switch(game.pelmen) {
+        case 5:
+            path += 'WTF/WTF-1.png';
+        break;
+
+        case 25:
+            path += 'WTF/WTF-2.png';
+        break;
+        
+        case 50:
+            path += 'WTF/WTF-3.png';
+        break;
+        
+        case 75:
+            path += 'WTF/WTF-4.png';
+        break;
+        
+        case 100:
+            path += 'WTF/WTF-5.png';
+        break;
+
+        default:
+            path += 'shlepa.png';
+    }
+
+    if(game.money >= 9999999) {
+        path = '/assets/images/WTF/WTF-6.png';
+    }
+    shlepa.src = path;
+}
+
 // Привяжка слика по шлёпе к событию клика
 shlepa.onclick = gClickShlepa;
 
@@ -104,6 +154,7 @@ shlepa.onclick = gClickShlepa;
 boost_first.onclick = gClickBoostFirst;
 boost_second.onclick = gClickBoostSecond;
 boost_third.onclick = gClickBoostThird;
+boost_fourth.onclick = gClickBoostFourth;
 
 // Привязка кнопок для открытия и закрытия магазина
 document.querySelector("#shop-open").onclick = () => shop.classList.toggle('none');

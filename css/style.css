@@ -59,6 +59,9 @@ button:hover {
   height: 25px;
 }
 
+#shlepa {
+}
+
 .statistics {
   margin-top: 40px;
 
@@ -69,46 +72,38 @@ button:hover {
   justify-content: space-evenly;
 }
 
-.modal {
+.shop {
   position: absolute;
   top: 0;
   right: 0;
-  bottom: 0;
   left: 0;
 
-  background-color: rgba(0, 0, 0, 0.1);
-}
-
-.modal > p {
-  width: 80%;
-
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-}
-
-.shop {
   margin-top: 200px;
   margin-left: auto;
   margin-right: auto;
 
-  width: 400px;
-  height: 300px;
+  padding: 20px;
+  width: 600px;
 
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
+  gap: 20px;
 
   background-color: white;
 
   border: 1px solid black;
   border-radius: 10px;
+
+  text-align: left;
 }
 
+.shop>table {
+  border-spacing: 20px;
+}
+
+
 .add-btn {
-  margin-left: 2%;
   width: 20px;
   height: 20px;
 }
