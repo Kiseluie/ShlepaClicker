@@ -115,7 +115,7 @@ function gClickBoostFourth(e) {
 }
 
 function WTF() {
-    let path = '/assets/images/'
+    let path = './assets/images/'
     switch(game.pelmen) {
         case 5:
             path += 'WTF/WTF-1.png';
