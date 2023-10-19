@@ -142,7 +142,7 @@ function WTF() {
     }
 
     if(game.money >= 9999999) {
-        path = '/assets/images/WTF/WTF-6.png';
+        path = './assets/images/WTF/WTF-6.png';
     }
     shlepa.src = path;
 }
